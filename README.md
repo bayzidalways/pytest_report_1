@@ -12,21 +12,80 @@ This project has two modules:
 * `com.automationpanda.example.calc_class` contains a basic Calculator class.
 
 Test modules are placed under the `tests` directory.
-Note that `tests` is *not* a Python package and has no "\_\_init\_\_.py" file.
+Note that `tests` is *not* a Python package and has no "__init__.py" file.
+
+Requirements
+------------
+- Python 3.x
+- `pytest`
+- `pytest-cov` (for coverage reports)
+
+Install dependencies (if not already installed):
+
+```bash
+python -m pip install pytest
+```
+
+```bash
+python -m pip install pytest-cov
+```
 
 Running Tests
 -------------
 pytest has many command line options with a powerful discovery mechanism:
-* `python -m pytest` to discover and run all tests from the current directory
-* `python -m pytest -v` to explicitly print the result of each test as it is run
-* `python -m pytest tests/test_calc_func.py` to run only the math function tests
-* `python -m pytest tests/test_calc_class.py` to run only the Calculator class tests
-* `python -m pytest --junitxml=results.xml` to generate a JUnit-style XML test report
-* `python -m pytest -h`  for command line help
+
+```bash
+python -m pytest
+```
+
+```bash
+python -m pytest -v
+```
+
+```bash
+python -m pytest tests/test_calc_func.py
+```
+
+```bash
+python -m pytest tests/test_calc_class.py
+```
+
+```bash
+python -m pytest --junitxml=results.xml
+```
+
+```bash
+python -m pytest -h
+```
 
 It is also possible to run pytest directly with the "pytest" or "py.test" command,
 instead of using the longer "python -m pytest" module form. However, the shorter
 command does *not* append the current directory path to *PYTHONPATH*.
 
-[Configuration settings](http://doc.pytest.org/en/latest/customize.html)
-may also be added to "pytest.ini".
+Coverage Reports
+----------------
+Generate an HTML coverage report using `pytest-cov`. The output will be placed in the `htmlcov/` directory.
+
+Run tests with coverage for the `com` package and generate HTML:
+
+```bash
+python -m pytest --cov=com --cov-report=html
+```
+
+Open the report at:
+- `htmlcov/index.html`
+
+Pytest Configuration
+--------------------
+You can make common options default by adding them to `pytest.ini`:
+
+```ini
+[pytest]
+addopts = -v --cov=com --cov-report=html
+testpaths = tests
+```
+
+GitHub: Commit htmlcov
+----------------------
+If you want the HTML coverage report committed to the repository (and visible on GitHub),
+make sure `.gitignore` allows it. Add this line:
